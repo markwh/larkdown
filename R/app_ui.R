@@ -15,8 +15,8 @@ app_ui <- function(request) {
         # Add output elements here
         # For example, a text output
         # textOutput("result")
-        mod_streamWindow_ui("streamWindow_1", "README.md")
-        
+        mod_streamWindow_ui("streamWindow_1", md_file = get_golem_options("md_file"))
+
       )
     )
   )

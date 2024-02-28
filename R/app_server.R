@@ -1,5 +1,8 @@
 #' @import shiny
 app_server <- function(input, output, session) {
-  mod_streamWindow_server("streamWindow_1")
-  
+
+  MD_FILE = get_golem_options("md_file")
+  if (!file.exists(MD_FILE)) file.create(MD_FILE)
+  mod_streamWindow_server("streamWindow_1", md_file = MD_FILE)
+
 }
