@@ -32,7 +32,18 @@ You can install the development version of shinystream like so:
 
 This is a basic example which shows you how to solve a common problem:
 
+
+```{r}
+md_file <- "test.ld"
+endpoint_url <- "http://localhost:8000/larkdown-chat"
+pyfile <- system.file("pysrc/larkdown.py", package = "shinystream")
+cmdargs <- c(pyfile, md_file, endpoint_url)
+
+system2("python", cmdargs)
+```
+
+
 ```{r example}
 # library(shinystream)
-# 2run_app()
+run_app("test.ld", "http://127.0.0.1:8000/larkdown-chat/")
 ```

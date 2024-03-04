@@ -1,5 +1,7 @@
 # First go at larkdown.py
 from langserve import RemoteRunnable
+from langchain.memory import ChatMessageHistory
+from langchain_core.messages import SystemMessage
 
 def parse_larkdown(text):
     lines = text.split('\n')
@@ -27,17 +29,40 @@ def parse_larkdown(text):
     if current_speaker and current_message:
         tuples.append((current_speaker, '\n'.join(current_message)))
 
-    return tuples
+    chat_history = ChatMessageHistory()
 
+    for role, content in tuples:
+        if role == "system":
+            chat_history.add_message(SystemMessage(content))
+        if role == "human":
+            chat_history.add_user_message(content)
+        elif role == "ai":
+            chat_history.add_ai_message(content)
+    
+    return chat_history.messages
+
+
+
+def append_file(file, text):
+    with open(file, 'a') as f:
+        f.write(text)
 
 def stream_to_file(messages, endpoint, file):
-    with open(file, 'w') as f:
-        # Append prompt for new AI user message
-        f.write('\n\n>AI\n')
-        for chunk in endpoint.stream(messages):
-            f.write(chunk)
-        # Append prompt for new Human user message
-        f.write('\n\n>Human\n')
+    with open(file, 'a') as f:
+        # # Append prompt for new AI user message
+        # f.write('\n\n>ai\n')
+        # for chunk in endpoint.stream({"messages": messages}):
+        #     f.write(chunk)
+        # # Append prompt for new Human user message
+        # f.write('\n\n>human\n')
+
+        # The same using my new append_file function
+        append_file(file, '\n\n>ai\n')
+        for chunk in endpoint.stream({"messages": messages}):
+            append_file(file, chunk)
+        append_file(file, '\n\n>human\n')
+
+
 
 # main function will need to use argparse to parse the command line arguments
 def main():

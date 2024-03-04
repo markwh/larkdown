@@ -8,6 +8,8 @@
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
 run_app <- function(
+  md_file,
+  endpoint_url,
   onStart = NULL,
   options = list(),
   enableBookmarking = NULL,
@@ -23,6 +25,8 @@ run_app <- function(
       enableBookmarking = enableBookmarking,
       uiPattern = uiPattern
     ),
-    golem_opts = list(...)
+    golem_opts = list(md_file = md_file,
+                      endpoint_url = endpoint_url,
+                      ...)
   )
 }

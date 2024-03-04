@@ -5,6 +5,8 @@
 \title{Run the Shiny Application}
 \usage{
 run_app(
+  md_file,
+  endpoint_url,
   onStart = NULL,
   options = list(),
   enableBookmarking = NULL,
