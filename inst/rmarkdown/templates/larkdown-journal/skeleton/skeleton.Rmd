@@ -1,0 +1,12 @@
+---
+title: "Larkdown Journal"
+output: output_format
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+>system
+
+You are an AI assistant interacting with the user via Rmarkdown.

@@ -1,0 +1,29 @@
+## Larkdown features
+
+A Larkdown document is just a text document set up to be parsed into
+messages. It is not necessarily Markdown, but I think it makes the most
+sense to treat it as such. So a Larkdown document is just a Markdown
+document that can be parsed into a list of (user, text) tuples. The main
+use case at the moment is to pass messages to the Langchain python API,
+which means the first message’s user must be “system”, followed by
+alternating messages from “human” and “ai”. That’s not a strict
+requirement of Larkdown, however.
+
+Key things to note:
+
+-   Everything before the first line starting with `>` is ignored
+
+<!-- -->
+
+    # library(larkdown)
+
+    register_endpoint("http://localhost:8000/larkdown-chat")
+    ld_stream_current()
+
+> system
+
+You are a helpful assistant.
+
+> human
+
+What are some good programming languages for statistical computing?
