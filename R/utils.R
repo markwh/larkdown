@@ -25,8 +25,13 @@ boot_up <- function(base_path = Sys.getenv("NOTEBOOK_DIR")) {
 
 #' @export
 import_larkdown <- function() {
-  reticulate::import_from_path(module = "larkdown",
-                               path = system.file("pysrc", package = "larkdown", mustWork = TRUE))
+  reticulate::import_from_path(
+    module = "larkdown",
+    path = system.file("pysrc", package = "larkdown", mustWork = TRUE), 
+    delay_load = TRUE)
 }
 
-
+#' @export
+register_endpoint <- function(endpoint_url) {
+  options(ld_endpoint_url = endpoint_url)
+}

@@ -2,9 +2,11 @@
 
 export(boot_up)
 export(import_larkdown)
+export(register_endpoint)
 export(run_app)
 import(shiny)
 importFrom(golem,with_golem_options)
+importFrom(reticulate,import)
 importFrom(shiny,NS)
 importFrom(shiny,shinyApp)
 importFrom(shiny,tagList)
