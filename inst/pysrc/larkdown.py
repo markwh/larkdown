@@ -48,7 +48,7 @@ def append_file(file, text):
         f.write(text)
 
 def stream_to_file(messages, endpoint, file):
-    with open(file, 'a') as f:
+    # with open(file, 'a') as f:
         # # Append prompt for new AI user message
         # f.write('\n\n>ai\n')
         # for chunk in endpoint.stream({"messages": messages}):
@@ -57,10 +57,10 @@ def stream_to_file(messages, endpoint, file):
         # f.write('\n\n>human\n')
 
         # The same using my new append_file function
-        append_file(file, '\n\n>ai\n')
-        for chunk in endpoint.stream({"messages": messages}):
-            append_file(file, chunk)
-        append_file(file, '\n\n>human\n')
+    append_file(file, '\n\n>ai\n')
+    for chunk in endpoint.stream({"messages": messages}):
+        append_file(file, chunk)
+    append_file(file, '\n\n>human\n')
 
 
 
