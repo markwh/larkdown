@@ -26,7 +26,7 @@ boot_up <- function(base_path = Sys.getenv("NOTEBOOK_DIR")) {
 #' @export
 import_larkdown <- function() {
   reticulate::import_from_path(module = "larkdown",
-                               path = system.file("pysrc", package = "shinystream", mustWork = TRUE))
+                               path = system.file("pysrc", package = "larkdown", mustWork = TRUE))
 }
 
 

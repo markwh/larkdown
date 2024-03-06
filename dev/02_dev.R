@@ -46,7 +46,7 @@ usethis::use_test("app")
 # Documentation
 
 ## Vignette ----
-usethis::use_vignette("shinystream")
+usethis::use_vignette("larkdown")
 devtools::build_vignettes()
 
 ## Code Coverage----

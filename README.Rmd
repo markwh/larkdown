@@ -13,16 +13,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# shinystream
+# larkdown
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of shinystream is to kill all humans
-
 ## Installation
 
-You can install the development version of shinystream like so:
+You can install the development version of larkdown like so:
 
 ``` r
 # FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
@@ -36,7 +34,7 @@ This is a basic example which shows you how to solve a common problem:
 ```{r}
 md_file <- "test.ld"
 endpoint_url <- "http://localhost:8000/larkdown-chat"
-pyfile <- system.file("pysrc/larkdown.py", package = "shinystream")
+pyfile <- system.file("pysrc/larkdown.py", package = "larkdown")
 cmdargs <- c(pyfile, md_file, endpoint_url)
 
 system2("python", cmdargs)
@@ -44,6 +42,6 @@ system2("python", cmdargs)
 
 
 ```{r example}
-# library(shinystream)
+# library(larkdown)
 run_app("test.ld", "http://127.0.0.1:8000/larkdown-chat/")
 ```

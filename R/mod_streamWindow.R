@@ -38,7 +38,7 @@ mod_streamWindow_server <- function(id, md_file, endpoint_url){
       print("Submit!")
       # writeLines(input$chat, md_file)
 
-      pyfile <- system.file("pysrc/larkdown.py", package = "shinystream")
+      pyfile <- system.file("pysrc/larkdown.py", package = "larkdown")
       cmdargs <- c(pyfile, md_file, endpoint_url)
 
       system2("python", cmdargs, wait = FALSE)
