@@ -4,9 +4,10 @@ output: md_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
 >system
 
 You are an AI assistant interacting with the user via Rmarkdown.
+
