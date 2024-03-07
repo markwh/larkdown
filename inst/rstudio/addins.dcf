@@ -1,0 +1,5 @@
+Name: Parse and Stream Current Document
+Description: Parse and stream the current Larkdown document
+Binding: ld_stream_current
+Interactive: false
+
