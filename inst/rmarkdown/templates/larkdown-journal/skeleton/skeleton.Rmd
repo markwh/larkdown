@@ -1,6 +1,6 @@
 ---
 title: "Larkdown Journal"
-output: output_format
+output: md_document
 ---
 
 ```{r setup, include=FALSE}
