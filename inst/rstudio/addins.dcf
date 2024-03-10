@@ -1,5 +1,14 @@
 Name: Parse and Stream Current Document
 Description: Parse and stream the current Larkdown document
-Binding: ld_stream_current
+Binding: stream_current
 Interactive: false
 
+Name: Knit and Stream Current Document
+Description: Knit, parse, and stream the current Larkdown document
+Binding: knit_and_stream_current
+Interactive: false
+
+Name: Launch Larkdown Journal
+Description: Open and if needed create a daily journal Larkdown document
+Binding: journal
+Interactive: false
