@@ -4,7 +4,11 @@ output: md_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+library(knitr)
+library(larkdown)
+opts_chunk$set(echo = TRUE, eval = FALSE)
+
+register_endpoint("http://localhost:8000/larkdown-chat")
 ```
 
 >system
