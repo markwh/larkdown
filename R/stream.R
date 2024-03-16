@@ -27,6 +27,9 @@ knit_and_stream_current <- function() {
   ld$stream_to_file(messages = ld_messages, endpoint = endpoint, file = infile)
 }
 
+#' Returns the result of calling `lardkown.parse_larkdown()` on the specified file
+#' 
+#' @param file defaults to `current_document()`
 knit_to_messages <- function(file = current_document()) {
   
   ld <- import_larkdown()

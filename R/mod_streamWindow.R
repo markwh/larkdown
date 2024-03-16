@@ -53,8 +53,3 @@ mod_streamWindow_server <- function(id, md_file, endpoint_url){
   })
 }
 
-## To be copied in the UI
-# mod_streamWindow_ui("streamWindow_1")
-
-## To be copied in the server
-# mod_streamWindow_server("streamWindow_1")
