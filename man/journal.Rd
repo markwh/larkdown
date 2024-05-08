@@ -4,7 +4,7 @@
 \alias{journal}
 \title{Launches a journaling session for the current day.}
 \usage{
-journal(base_path = Sys.getenv("NOTEBOOK_DIR"))
+journal(base_path = Sys.getenv("LARKDOWN_DIR"))
 }
 \description{
 Launches a journaling session for the current day.

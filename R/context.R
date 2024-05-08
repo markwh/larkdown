@@ -2,6 +2,8 @@
 # Functions for bringing data in to LLM context
 
 #' Return text of a file
+#' @param path Path to directory
+#' @export
 file_text <- function(path){
   path <- normalizePath(path)
   out <- paste(readLines(path), collapse = "\n")
@@ -11,6 +13,7 @@ file_text <- function(path){
 
 #' Return text of files for all files in a directory
 #' @param path Path to directory
+#' @export
 dir_text <- function(path, pattern = ".*"){
   path <- normalizePath(path)
   files <- list.files(path, pattern = pattern, full.names = TRUE)
@@ -28,6 +31,7 @@ dir_text <- function(path, pattern = ".*"){
 
 #' Return text of a youtube transcript
 #' @param yt_url url of youtube video
+#' @export
 yt_text <- function(yt_url) {
   lcc <- reticulate::import("langchain_community")
   loader <- lcc$document_loaders$YoutubeLoader$from_youtube_url(yt_url, add_video_info = TRUE)

@@ -54,7 +54,7 @@ def parse_larkdown(text, open_delim=">", close_delim=">/"):
     
     tuples = parse_larkdown_to_tuples(text, open_delim=open_delim, close_delim=close_delim)
 
-    chat_history = ChatMessageHistory()
+    chat_history = ChatMessageHistory() 
     for role, content in tuples:
         if role == "system":
             chat_history.add_message(SystemMessage(content))

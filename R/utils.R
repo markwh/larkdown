@@ -4,7 +4,7 @@
 #' Launches a journaling session for the current day. 
 #' 
 #' @export
-journal <- function(base_path = Sys.getenv("NOTEBOOK_DIR")) {
+journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
 
   filename <- file.path(base_path,
                         sprintf("notebook%s.Rmd", format(Sys.Date(), "%Y%m%d")))

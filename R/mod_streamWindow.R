@@ -13,12 +13,12 @@ mod_streamWindow_ui <- function(id, md_file) {
     tabsetPanel(
       tabPanel("GUI",
         fluidRow(
-          textAreaInput(ns("chat"), "Chat", height = "300px"),
-          actionButton(ns("submit"), "Submit")
-        ),
-        fluidRow(
           # includeMarkdown(md_file)
           uiOutput(ns("file_content"))
+        ),
+        fluidRow(
+          textAreaInput(ns("chat"), "Chat", height = "300px"),
+          actionButton(ns("submit"), "Submit")
         )
       )
     )
