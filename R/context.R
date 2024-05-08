@@ -26,3 +26,13 @@ dir_text <- function(path, pattern = ".*"){
   out
 }
 
+#' Return text of a youtube transcript
+#' @param yt_url url of youtube video
+yt_text <- function(yt_url) {
+  lcc <- reticulate::import("langchain_community")
+  loader <- lcc$document_loaders$YoutubeLoader$from_youtube_url(yt_url, add_video_info = TRUE)
+  yt_document <- loader$load()
+  
+  out <- yt_document[[1]]$page_content
+  out
+}
