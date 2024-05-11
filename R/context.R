@@ -17,7 +17,7 @@ file_text <- function(path){
 dir_text <- function(path, pattern = ".*"){
   path <- normalizePath(path)
   files <- list.files(path, pattern = pattern, full.names = TRUE)
-
+  
   file_names <- gsub(path, "", files)
 
   file_text_vec <- purrr::map_chr(files, file_text)
@@ -38,5 +38,31 @@ yt_text <- function(yt_url) {
   yt_document <- loader$load()
   
   out <- yt_document[[1]]$page_content
+  out
+}
+
+#' Return token count and pricing for gpt-4 and gpt-3.5
+#' 
+#' @param input character string to pass as llm input. 
+#' @param encoding passed to `tiktoken.get_encoding`
+#' 
+#' @export
+count_tokens <- function(input, encoding = "cl100k_base") {
+  tkt <- reticulate::import("tiktoken")
+  enc <- tkt$get_encoding(encoding)
+  
+  n_token <- length(enc$encode(input))
+  
+  # prices might change over time--currently $10 per 1M tokens for gpt4, $0.5 for gpt3.5
+  # See https://openai.com/api/pricing/
+  cost_gpt35 <- n_token * 0.5 / 1e6
+  cost_gpt4 <- n_token * 10 / 1e6
+  
+  out <- list(
+    count = n_token,
+    cost_gpt35 = cost_gpt35,
+    cost_gpt4 = cost_gpt4
+  )
+  
   out
 }

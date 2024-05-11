@@ -6,6 +6,9 @@
 \usage{
 file_text(path)
 }
+\arguments{
+\item{path}{Path to directory}
+}
 \description{
 Return text of a file
 }
