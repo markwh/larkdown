@@ -4,7 +4,10 @@
 \alias{stream_current}
 \title{Parse the current document and stream response back to it}
 \usage{
-stream_current(endpoint_url = getOption("ld_endpoint_url"))
+stream_current(
+  endpoint_url = getOption("ld_endpoint_url"),
+  prompt = getOption("ld_prompt", default = "@")
+)
 }
 \description{
 Parse the current document and stream response back to it

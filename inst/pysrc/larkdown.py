@@ -1,14 +1,12 @@
-# First go at larkdown.py
 from langserve import RemoteRunnable
 from langchain.memory import ChatMessageHistory
 from langchain_core.messages import SystemMessage
 
-
-def parse_larkdown_to_tuples(text, open_delim=">", close_delim=">/"):
+def parse_larkdown_to_tuples(text, larkdown_prompt):
     """
     Returns a list of tuples
     """
-  
+    larkdown_identifiers = ['system', 'human', 'ai', '/', 'ignore', 'endignore']
     lines = text.split('\n')
     tuples = []
     current_speaker = None
@@ -19,26 +17,29 @@ def parse_larkdown_to_tuples(text, open_delim=">", close_delim=">/"):
     for line in lines:
         trimmed_line = line.strip()
         
-        if trimmed_line.startswith('<!-- ignore -->'):
-            ignore_block = True
-        elif trimmed_line.startswith('<!-- endignore -->'):
-            ignore_block = False
-        elif ignore_block:
+        if ignore_block:
+            if any(trimmed_line.startswith(f'{prompt}endignore') for prompt in larkdown_prompt):
+                ignore_block = False
             continue
-        elif trimmed_line.startswith(close_delim):
+        
+        if any(trimmed_line.startswith(f'{prompt}{identifier}') for prompt in larkdown_prompt for identifier in larkdown_identifiers):
+            larkdown_identifier = next((identifier for identifier in larkdown_identifiers 
+                                        if any(trimmed_line.startswith(f'{prompt}{identifier}') for prompt in larkdown_prompt)), None)
+            if larkdown_identifier == 'ignore':
+                ignore_block = True
+                continue
+            
             if current_speaker and current_message:
                 tuples.append((current_speaker, '\n'.join(current_message)))
                 current_message = []
-            message_open = False  # Close the current message block
-        elif trimmed_line.startswith(open_delim):
-            if current_speaker and (current_message or message_open):
-                # Close the previous message if it's open or there's content to save
-                tuples.append((current_speaker, '\n'.join(current_message)))
-                current_message = []
-            current_speaker = trimmed_line[len(open_delim):].strip()
-            message_open = True  # Mark the message block as open
+            
+            if larkdown_identifier == '/':
+                current_speaker = None
+                message_open = False
+            else:
+                current_speaker = larkdown_identifier
+                message_open = True
         elif message_open:
-            # Accumulate lines to the current message if a message block is open
             current_message.append(line)
 
     # Handle the last message if the document ends without a closing delimiter
@@ -47,12 +48,11 @@ def parse_larkdown_to_tuples(text, open_delim=">", close_delim=">/"):
 
     return tuples
 
-def parse_larkdown(text, open_delim=">", close_delim=">/"):
+def parse_larkdown(text, larkdown_prompt):
     """
     Returns a list of LangChain message objects
     """
-    
-    tuples = parse_larkdown_to_tuples(text, open_delim=open_delim, close_delim=close_delim)
+    tuples = parse_larkdown_to_tuples(text, larkdown_prompt)
 
     chat_history = ChatMessageHistory() 
     for role, content in tuples:
@@ -65,47 +65,32 @@ def parse_larkdown(text, open_delim=">", close_delim=">/"):
     
     return chat_history.messages
 
-
-
 def append_file(file, text):
     with open(file, 'a') as f:
         f.write(text)
 
 def stream_to_file(messages, endpoint, file):
-    # with open(file, 'a') as f:
-        # # Append prompt for new AI user message
-        # f.write('\n\n>ai\n')
-        # for chunk in endpoint.stream({"messages": messages}):
-        #     f.write(chunk)
-        # # Append prompt for new Human user message
-        # f.write('\n\n>human\n')
-
-        # The same using my new append_file function
     append_file(file, '\n\n>ai\n')
     for chunk in endpoint.stream({"messages": messages}):
         append_file(file, chunk)
     append_file(file, '\n\n>human\n')
 
-
-
-# main function will need to use argparse to parse the command line arguments
 def main():
     import argparse
 
-    # arguments are the file and the endpoint url
     parser = argparse.ArgumentParser(description='Convert larkdown to a stream of messages')
     parser.add_argument('file', help='The file to convert')
     parser.add_argument('endpoint_url', help='The langserve endpoint to use')
+    parser.add_argument('larkdown_prompt', nargs='+', help='The larkdown prompts to use for parsing')
 
     args = parser.parse_args()
 
     with open(args.file, 'r') as f:
         text = f.read()
     
-    messages = parse_larkdown(text)
+    messages = parse_larkdown(text, args.larkdown_prompt)
     endpoint = RemoteRunnable(args.endpoint_url)
     stream_to_file(messages, endpoint, args.file)
-
 
 if __name__ == '__main__':
     main()

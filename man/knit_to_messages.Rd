@@ -4,7 +4,10 @@
 \alias{knit_to_messages}
 \title{Returns the result of calling `lardkown.parse_larkdown()` on the specified file}
 \usage{
-knit_to_messages(file = current_document())
+knit_to_messages(
+  file = current_document(),
+  prompt = getOption("ld_prompt", default = "@")
+)
 }
 \arguments{
 \item{file}{defaults to `current_document()`}
