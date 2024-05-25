@@ -20,9 +20,22 @@ journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
 #'
 #' @export
 new_larkdown <- function(filename = ts_filename(prefix = "larkdown"), 
-                         template="larkdown-file", package = "larkdown") {
+                         system_message = "You are a helpful assistant.",
+                         template="larkdown-glue", package = "larkdown") {
+  # Write the template file
+  rmarkdown::draft(filename, 
+                   template = template, 
+                   package = package, 
+                   edit = FALSE)
+
+  text_raw <- file_text(filename)
+  text_filled <- glue::glue(text_raw, 
+                            system_prompt = system_message, 
+                            .open = "{{", 
+                            .close = "}}")
   
-  rmarkdown::draft(filename, template = template, package = package, edit = FALSE)
+  cat(text_filled, file = filename)
+  
   rstudioapi::documentOpen(filename)
 }
 

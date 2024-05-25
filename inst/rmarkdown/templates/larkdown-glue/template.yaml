@@ -1,0 +1,4 @@
+name: Larkdown File
+description: >
+   Parseable document for Langchain messaging
+create_dir: FALSE
