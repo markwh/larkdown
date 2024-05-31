@@ -11,6 +11,7 @@ Imports:
     glue,
     golem (>= 0.4.1),
     htmltools,
+    magrittr,
     rstudioapi,
     shiny (>= 1.8.0)
 Encoding: UTF-8
