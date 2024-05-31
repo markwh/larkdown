@@ -64,7 +64,7 @@ journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
   if (file.exists(filename)) {
     rstudioapi::documentOpen(filename)
   } else {
-    new_larkdown(filename, template = "larkdown-journal", package = "larkdown")
+    new_larkdown(filename, template = "larkdown-journal")
   }
   return(TRUE)
 }
