@@ -8,7 +8,9 @@ new_larkdown(
   filename = ts_filename(prefix = "larkdown"),
   system_message = NULL,
   message_list = list(),
-  template = "larkdown-glue"
+  header_text = "",
+  template = "larkdown-glue",
+  open = TRUE
 )
 }
 \description{
