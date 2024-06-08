@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 register_endpoint("http://localhost:8000/larkdown-chat")
 ```
 
+{{header_text}}
 
 {{ld_prompt}}system 
 

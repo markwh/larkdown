@@ -5,7 +5,9 @@
 new_larkdown <- function(filename = ts_filename(prefix = "larkdown"), 
                          system_message = NULL,
                          message_list = list(),
-                         template="larkdown-glue") {
+                         header_text = "",
+                         template="larkdown-glue",
+                         open = TRUE) {
   
   # Get system message
   system_message_from_list <- get_system_message_txt(message_list)
@@ -28,6 +30,7 @@ new_larkdown <- function(filename = ts_filename(prefix = "larkdown"),
   
   text_raw <- file_text(filename)
   text_filled <- glue::glue(text_raw, 
+                            header_text = header_text,
                             ld_prompt = prompt_chr,
                             system_prompt = system_message, 
                             .open = "{{", 
@@ -50,7 +53,10 @@ new_larkdown <- function(filename = ts_filename(prefix = "larkdown"),
   
   cat(convo_text, file = filename, append = TRUE)
   
-  rstudioapi::documentOpen(filename)
+  if (open) 
+    rstudioapi::documentOpen(filename)
+  
+  invisible(filename)
 }
 
 
