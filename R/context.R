@@ -13,6 +13,7 @@ file_text <- function(path){
 
 #' Return text of files for all files in a directory
 #' @param path Path to directory
+#' @importFrom purrr possibly
 #' @export
 dir_text <- function(path, pattern = ".*"){
   path <- normalizePath(path)
@@ -20,7 +21,8 @@ dir_text <- function(path, pattern = ".*"){
   
   file_names <- gsub(path, "", files)
 
-  file_text_vec <- purrr::map_chr(files, file_text)
+  file_text_vec <- purrr::map_chr(files, possibly(~suppressWarnings(file_text(.)), 
+                                                  otherwise = ""))
 
   # collapse these using a template
   templ_string <- "## File: %s\n\n%s\n\n"
