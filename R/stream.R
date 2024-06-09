@@ -19,6 +19,7 @@ stream_current <- function(endpoint_url=getOption("ld_endpoint_url"),
                     file = stream_path)
 }
 
+#' @export
 knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"), 
                                     prompt = getOption("ld_prompt", default = "@")) {
   ld <- import_larkdown()
@@ -34,6 +35,7 @@ knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"),
 #' Returns the result of calling `lardkown.parse_larkdown()` on the specified file
 #' 
 #' @param file defaults to `current_document()`
+#' @export
 knit_to_messages <- function(file = current_document(),
                              prompt = getOption("ld_prompt", default = "@")) {
   
