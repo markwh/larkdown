@@ -75,7 +75,8 @@ journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
   return(TRUE)
 }
 
-
+#' Returns "system", "human", or "ai"
+#' @export
 ld_message_type <- function(message) {
   out <- case_when(
     grepl("SystemMessage$", class(message)[1]) ~ "system",
