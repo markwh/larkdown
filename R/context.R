@@ -43,6 +43,17 @@ yt_text <- function(yt_url) {
   out
 }
 
+#' Returns a character vector (length 1) of concatenated message text
+#' 
+#' @param message_list list of BaseMessage objects
+#' @export
+messages_text <- function(message_list) {
+  out_vec <- purrr::map_chr(message_list, ~.$pretty_repr())
+  
+  out <- paste(out_vec, collapse = "\n")
+  out
+}
+
 #' Return token count and pricing for gpt-4 and gpt-3.5
 #' 
 #' @param input character string to pass as llm input. 
@@ -58,12 +69,12 @@ count_tokens <- function(input, encoding = "cl100k_base") {
   # prices might change over time--currently $10 per 1M tokens for gpt4, $0.5 for gpt3.5
   # See https://openai.com/api/pricing/
   cost_gpt35 <- n_token * 0.5 / 1e6
-  cost_gpt4 <- n_token * 10 / 1e6
+  cost_gpt4o <- n_token * 5 / 1e6
   
   out <- list(
     count = n_token,
     cost_gpt35 = cost_gpt35,
-    cost_gpt4 = cost_gpt4
+    cost_gpt4o = cost_gpt4o
   )
   
   out
