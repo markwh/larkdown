@@ -19,9 +19,11 @@ stream_current <- function(endpoint_url=getOption("ld_endpoint_url"),
                     file = stream_path)
 }
 
+#' knit the current document, parse to messages, and stream from endpoint
 #' @export
 knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"), 
-                                    prompt = getOption("ld_prompt", default = "@")) {
+                                    prompt = getOption("ld_prompt", default = "@")
+                                    ) {
   ld <- import_larkdown()
   langserve <- import("langserve")
   
@@ -30,6 +32,8 @@ knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"),
   ld_messages <- knit_to_messages(infile, prompt = prompt)
   endpoint <- langserve$RemoteRunnable(endpoint_url)
   ld$stream_to_file(messages = ld_messages, endpoint = endpoint, file = infile)
+  
+  
 }
 
 #' Returns the result of calling `lardkown.parse_larkdown()` on the specified file

@@ -1,6 +1,13 @@
 
 #' Creates a new Rmarkdown file with a Larkdown template, then opens the file
 #'
+#' @param filename path to save Rmarkdown file
+#' @param system_message optional character, uses a simple default if not specified
+#' @param message_list optional list of messages to populate larkdown conversation
+#' @param header_text optional text to insert before the system prompt
+#' @param template which template file to use
+#' @param open if TRUE (default), open the document in the Rstudio IDE
+#' 
 #' @export
 new_larkdown <- function(filename = ts_filename(prefix = "larkdown"), 
                          system_message = NULL,
@@ -10,7 +17,7 @@ new_larkdown <- function(filename = ts_filename(prefix = "larkdown"),
                          open = TRUE) {
   
   # Get system message
-  system_message_from_list <- get_system_message_txt(message_list)
+  system_message_from_list <- get_system_message_text(message_list)
   default_system_message <- "You are a helpful assistant."
   
   system_message <- if (!is.null(system_message)) {
@@ -62,6 +69,8 @@ new_larkdown <- function(filename = ts_filename(prefix = "larkdown"),
 
 #' Launches a journaling session for the current day. 
 #' 
+#' @param base_path directory in which to save the journal
+#' 
 #' @export
 journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
   
@@ -76,6 +85,8 @@ journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
 }
 
 #' Returns "system", "human", or "ai"
+#' 
+#' @param message LangChain `BaseMessage` object
 #' @export
 ld_message_type <- function(message) {
   out <- case_when(
@@ -87,6 +98,14 @@ ld_message_type <- function(message) {
   out
 }
 
+#' Creates a larkdown-formatted character string from a list of messages
+#' 
+#' Used to populate a larkdown file (which is just a textfile) from a message list
+#' 
+#' @param message_list a list of LangChain `BaseMessage` objects
+#' @param larkdown_prompt Larkdown prompt character to use, defaults to `"@"`
+#' 
+#' @export
 ld_convo_text <- function(message_list, larkdown_prompt = "@") {
   message_fmt_list <- message_list %>% 
     purrr::map(~glue::glue(
@@ -98,8 +117,12 @@ ld_convo_text <- function(message_list, larkdown_prompt = "@") {
   out
 }
 
-#' Returns a character vector
-get_system_message_txt <- function(message_list) {
+#' Returns a character string with the text of a message lists's system message
+#'
+#' @param message_list a list of LangChain `BaseMessage` objects
+#' 
+#' @export
+get_system_message_text <- function(message_list) {
   message_types <- purrr::map_chr(message_list, ~ld_message_type(.))
   system_message <- message_list[message_types == "system"]
   

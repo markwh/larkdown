@@ -13,6 +13,19 @@ new_larkdown(
   open = TRUE
 )
 }
+\arguments{
+\item{filename}{path to save Rmarkdown file}
+
+\item{system_message}{optional character, uses a simple default if not specified}
+
+\item{message_list}{optional list of messages to populate larkdown conversation}
+
+\item{header_text}{optional text to insert before the system prompt}
+
+\item{template}{which template file to use}
+
+\item{open}{if TRUE (default), open the document in the Rstudio IDE}
+}
 \description{
 Creates a new Rmarkdown file with a Larkdown template, then opens the file
 }

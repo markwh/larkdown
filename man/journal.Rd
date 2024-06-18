@@ -6,6 +6,9 @@
 \usage{
 journal(base_path = Sys.getenv("LARKDOWN_DIR"))
 }
+\arguments{
+\item{base_path}{directory in which to save the journal}
+}
 \description{
 Launches a journaling session for the current day.
 }

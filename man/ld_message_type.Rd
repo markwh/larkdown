@@ -6,6 +6,9 @@
 \usage{
 ld_message_type(message)
 }
+\arguments{
+\item{message}{LangChain `BaseMessage` object}
+}
 \description{
 Returns "system", "human", or "ai"
 }
