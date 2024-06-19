@@ -37,6 +37,8 @@ knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"),
   
   ld_messages <- knit_to_messages(infile, prompt = prompt)
   endpoint <- langserve$RemoteRunnable(endpoint_url)
+  
+  cat(system2("timeout", c("30s", "tail", "-f", infile), wait = FALSE))
   ld$stream_to_file(messages = ld_messages, endpoint = endpoint, file = infile)
   
 }
