@@ -34,13 +34,19 @@ knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"),
   langserve <- import("langserve")
   
   infile <- current_document()
+  rstudioapi::documentClose()
+  rstudioapi::executeCommand("activateConsole")
   
   ld_messages <- knit_to_messages(infile, prompt = prompt)
   endpoint <- langserve$RemoteRunnable(endpoint_url)
   
-  cat(system2("timeout", c("30s", "tail", "-f", infile), wait = FALSE))
+  pid <- sys::exec_background("tail", c("-f", infile), std_out = TRUE)
   ld$stream_to_file(messages = ld_messages, endpoint = endpoint, file = infile)
   
+  rstudioapi::documentOpen(infile)
+  tools::pskill(pid)
+  # reopen_current_document()
+  # blink()
 }
 
 #' Returns the result of calling `lardkown.parse_larkdown()` on the specified file
