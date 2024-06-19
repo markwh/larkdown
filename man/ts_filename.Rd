@@ -6,6 +6,9 @@
 \usage{
 ts_filename(prefix = "", suffix = "", ext = ".Rmd")
 }
+\arguments{
+\item{prefix, suffix, ext}{appended to the timestamp to create the filename}
+}
 \description{
 Timestamp filename creator
 }

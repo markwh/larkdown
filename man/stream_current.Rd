@@ -9,6 +9,11 @@ stream_current(
   prompt = getOption("ld_prompt", default = "@")
 )
 }
+\arguments{
+\item{endpoint_url}{endpoint of LangServe endpoint}
+
+\item{prompt}{Larkdown prompt character}
+}
 \description{
 Parse the current document and stream response back to it
 }

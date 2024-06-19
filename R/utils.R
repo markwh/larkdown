@@ -14,6 +14,8 @@ import_larkdown <- function() {
 
 #' Sets the `ld_endpoint_url` option
 #'
+#' @param endpoint_url url of larkdown langserve endpoint
+#' 
 #' @export
 register_endpoint <- function(endpoint_url) {
   options(ld_endpoint_url = endpoint_url)
@@ -21,6 +23,8 @@ register_endpoint <- function(endpoint_url) {
 
 #' Timestamp filename creator
 #'
+#' @param prefix,suffix,ext appended to the timestamp to create the filename
+#' 
 #' @export
 ts_filename <- function(prefix = "", suffix = "", ext = ".Rmd") {
   basename <- format(Sys.time(), "%Y%m%d_%H%M%S")

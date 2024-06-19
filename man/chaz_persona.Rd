@@ -15,7 +15,11 @@ chaz_persona(
 \arguments{
 \item{input}{Request for a persona to generate}
 
-\item{file}{if not NULL, create}
+\item{file}{if not NULL, create a new larkdown file containing the output from chaz}
+
+\item{open}{if TRUE, open the file created, ignored if `file` is `NULL`}
+
+\item{endpoint_url}{url of chaz langserve endpoint}
 }
 \description{
 Returns a list of `description` and `prompt` and optionally creates a new

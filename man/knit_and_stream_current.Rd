@@ -9,6 +9,11 @@ knit_and_stream_current(
   prompt = getOption("ld_prompt", default = "@")
 )
 }
+\arguments{
+\item{endpoint_url}{endpoint of LangServe endpoint}
+
+\item{prompt}{Larkdown prompt character}
+}
 \description{
 knit the current document, parse to messages, and stream from endpoint
 }

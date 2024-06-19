@@ -3,7 +3,10 @@
 #'  larkdown file.
 #'  
 #' @param input Request for a persona to generate
-#' @param file if not NULL, create
+#' @param file if not NULL, create a new larkdown file containing the output from chaz
+#' @param open if TRUE, open the file created, ignored if `file` is `NULL`
+#' @param endpoint_url url of chaz langserve endpoint
+#' 
 #' @export
 chaz_persona <- function(input, 
                          file = NULL, 

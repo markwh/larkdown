@@ -6,6 +6,9 @@
 \usage{
 register_endpoint(endpoint_url)
 }
+\arguments{
+\item{endpoint_url}{url of larkdown langserve endpoint}
+}
 \description{
 Sets the `ld_endpoint_url` option
 }

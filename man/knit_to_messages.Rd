@@ -11,6 +11,8 @@ knit_to_messages(
 }
 \arguments{
 \item{file}{defaults to `current_document()`}
+
+\item{prompt}{Larkdown prompt character}
 }
 \description{
 Returns the result of calling `lardkown.parse_larkdown()` on the specified file
