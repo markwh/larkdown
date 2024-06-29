@@ -109,7 +109,7 @@ ld_message_type <- function(message) {
 ld_convo_text <- function(message_list, larkdown_prompt = "@") {
   message_fmt_list <- message_list %>% 
     purrr::map(~glue::glue(
-      "{ld_prompt}{msg_type}\n{msg_txt}",
+      "{ld_prompt}{msg_type}\n\n{msg_txt}",
       ld_prompt = larkdown_prompt,
       msg_type =ld_message_type(.),
       msg_txt = .$content))
