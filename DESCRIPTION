@@ -1,6 +1,6 @@
 Package: larkdown
 Title: Shiny Golem Module for LangChain Streaming
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: person('Mark', 'Hagemann', email = 'mark.hagemann@gmail.com', role = c('cre', 'aut'))
 Description: PKG_DESC.
 License: MIT + file LICENSE
