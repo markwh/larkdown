@@ -7,7 +7,7 @@ def parse_larkdown_to_tuples(text, larkdown_prompt):
     Returns a list of tuples
     """
     larkdown_identifiers = ['system', 'human', 'ai', '/', 'ignore', 'endignore']
-    lines = text.split('\n')
+    lines = text.strip().split('\n')
     tuples = []
     current_speaker = None
     current_message = []
@@ -30,7 +30,7 @@ def parse_larkdown_to_tuples(text, larkdown_prompt):
                 continue
             
             if current_speaker and current_message:
-                tuples.append((current_speaker, '\n'.join(current_message)))
+                tuples.append((current_speaker, '\n'.join(current_message).strip()))
                 current_message = []
             
             if larkdown_identifier == '/':
