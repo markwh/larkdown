@@ -45,7 +45,9 @@ knit_and_stream_current <- function(endpoint_url = getOption("ld_endpoint_url"),
   on.exit(tools::pskill(pid))
   
   try(ld$stream_to_file(messages = ld_messages, endpoint = endpoint, file = infile))
-  rstudioapi::documentOpen(infile)
+  rstudioapi::documentOpen(infile, line = -1L, moveCursor = TRUE)
+  nlines <- length(readLines(infile, ))
+  rstudioapi::setCursorPosition(rstudioapi::document_position(nlines + 1L, 1L))
 }
 
 #' Returns the result of calling `lardkown.parse_larkdown()` on the specified file
@@ -69,5 +71,3 @@ knit_to_messages <- function(file = current_document(),
   
   ld_messages
 }
-
-
