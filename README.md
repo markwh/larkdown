@@ -9,9 +9,7 @@
 **Larkdown** is an R package that transforms Rmarkdown documents into a
 chat interface for Large Language Models (LLMs). Built to work with
 [LangChain](https://github.com/langchain-ai/langchain) and
-[LangServe](https://github.com/langchain-ai/langserve), Larkdown
-empowers users to interact with AI in a familiar, flexible, and powerful
-environment.
+[LangServe](https://github.com/langchain-ai/langserve).
 
 <figure>
 <img src="inst/media/gifs/larkdown-intro-fast.gif"
@@ -31,12 +29,23 @@ alt="Larkdown Demo" />
 
 ## Introduction
 
-Larkdown provides a robust interface for leveraging Large Language
-Models (LLMs) through Rmarkdown documents. This package includes tools
-for converting Rmarkdown text into chat messages, submitting those
-messages to an LLM, and rendering the responses back into the document.
-It aims to offer a streamlined and efficient way to interact with LLMs
-within the R ecosystem.
+Larkdown provides a simple interface for chatting with LLMs through
+Rmarkdown documents in Rstudio. Why would you want to do this? Compared
+to other interfaces for working with chat models, Rmarkdown has some
+nice features:
+
+- **Code Execution**: Execute code directly within the Rmarkdown
+  document, supporting multiple languages like Python, SQL, and more.
+- **Editable Chat History**: Easily edit upstream messages, correct
+  errors, or modify instructions.
+- **Flexible Chat Interface**: Use any LLM provider by configuring the
+  endpoint, giving you freedom from provider lock-in.
+- **Rstudio Integration**: Includes Rstudio addins and keyboard
+  shortcuts for a streamlined workflow.
+- **Persistent Conversations**: Store chat history as text files and
+  resume conversations effortlessly.
+- **Customizable Output**: Render conversations in various formats
+  including HTML and PDF.
 
 ## Installation
 
@@ -71,24 +80,6 @@ endpoint:
 ``` r
 knit_and_stream_current()
 ```
-
-## Features
-
-Larkdown offers a range of features designed to enhance interaction with
-AI:
-
-- **Code Execution**: Execute code directly within the Rmarkdown
-  document, supporting multiple languages like Python, SQL, and more.
-- **Editable Chat History**: Easily edit upstream messages, correct
-  errors, or modify instructions.
-- **Flexible Chat Interface**: Use any LLM provider by configuring the
-  endpoint, giving you freedom from provider lock-in.
-- **Rstudio Integration**: Includes Rstudio addins and keyboard
-  shortcuts for a streamlined workflow.
-- **Persistent Conversations**: Store chat history as text files and
-  resume conversations effortlessly.
-- **Customizable Output**: Render conversations in various formats
-  including HTML and PDF.
 
 ## Caveats
 
