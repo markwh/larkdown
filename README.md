@@ -13,6 +13,12 @@ chat interface for Large Language Models (LLMs). Built to work with
 empowers users to interact with AI in a familiar, flexible, and powerful
 environment.
 
+<figure>
+<img src="inst/media/gifs/larkdown-intro-fast.gif"
+alt="Larkdown Demo" />
+<figcaption aria-hidden="true">Larkdown Demo</figcaption>
+</figure>
+
 ## Table of Contents
 
 - [Introduction](#introduction)

@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 **Larkdown** is an R package that transforms Rmarkdown documents into a chat interface for Large Language Models (LLMs). Built to work with [LangChain](https://github.com/langchain-ai/langchain) and [LangServe](https://github.com/langchain-ai/langserve), Larkdown empowers users to interact with AI in a familiar, flexible, and powerful environment.
 
+![Larkdown Demo](inst/media/gifs/larkdown-intro-fast.gif)
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Installation](#installation)
