@@ -21,6 +21,17 @@ register_endpoint <- function(endpoint_url) {
   options(ld_endpoint_url = endpoint_url)
 }
 
+#' Sets larkdown endpoint url options.
+#'
+#' @param root_url url of larkdown langserve project root
+#' 
+#' @export
+ld_register_endpoints <- function(root_url) {
+  options(ld_endpoint_url = paste0(root_url, "/larkdown-chat"),
+          chaz_endpoint_url = paste0(root_url, "/chaz"),
+          ld_search_endpoint_url = paste0(root_url, "/ld_search"))
+}
+
 #' Timestamp filename creator
 #'
 #' @param prefix,suffix,ext appended to the timestamp to create the filename
