@@ -10,6 +10,29 @@ file_text <- function(path){
   out
 }
 
+#' Return an ASCII representation of directory structure
+#' 
+#' @param dir path to a directory
+#' @param level used in recursion
+#' @param pattern passed to list.files()
+dir_str <- function(dir, level = 0, pattern = NULL) {
+  # Get the list of files and directories in the specified directory
+  files <- list.files(dir, full.names = TRUE, pattern = pattern)
+  
+  # Iterate through the files and directories
+  for (file in files) {
+    # Get the base name of the file or directory
+    base_name <- basename(file)
+    
+    # Print the appropriate number of spaces and file/directory name
+    cat(strrep("  ", level), "|-- ", base_name, "\n", sep = "")
+    
+    # If the file is a directory, recursively print its structure
+    if (dir.exists(file)) {
+      print_folder_structure(file, level + 1)
+    }
+  }
+}
 
 #' Return text of files for all files in a directory
 #' @param path Path to directory
