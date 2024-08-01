@@ -3,7 +3,8 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(
+library(knitr)
+opts_chunk$set(
   echo = TRUE, 
   eval = FALSE # Set individual chunks to `eval = TRUE` if llm needs output
   )
