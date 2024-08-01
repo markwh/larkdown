@@ -1,6 +1,5 @@
 ---
-title: "Larkdown File"
-output: md_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -11,8 +10,8 @@ knitr::opts_chunk$set(
 ```
 
 ```{r}
-# library(larkdown)
-register_endpoint("http://localhost:8000/larkdown-chat")
+library(larkdown)
+ld_register_endpoints("http://localhost:8000")
 ```
 
 {{header_text}}

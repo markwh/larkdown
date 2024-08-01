@@ -59,10 +59,10 @@ library(larkdown)
 
 Larkdown requires a deployed [LangServe
 endpoint](https://github.com/langchain-ai/langserve). This can be
-configured using the `register_endpoint()` function:
+configured using the `ld_register_endpoints()` function:
 
 ``` r
-register_endpoint("your_endpoint_url")
+ld_register_endpoints("your_endpoint_url")
 ```
 
 ## Usage
