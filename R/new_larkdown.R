@@ -70,12 +70,15 @@ new_larkdown <- function(filename = ts_filename(prefix = "larkdown"),
 #' Launches a journaling session for the current day. 
 #' 
 #' @param base_path directory in which to save the journal
+#' @param date Which date to open journal for, defaults to today's date
 #' 
 #' @export
-journal <- function(base_path = Sys.getenv("LARKDOWN_DIR")) {
+journal <- function(base_path = Sys.getenv("LARKDOWN_DIR"), date = Sys.Date()) {
+  
+  stopifnot(length(date) == 1L, lubridate::is.Date(date))
   
   filename <- file.path(base_path,
-                        sprintf("notebook%s.Rmd", format(Sys.Date(), "%Y%m%d")))
+                        sprintf("notebook%s.Rmd", format(date, "%Y%m%d")))
   if (file.exists(filename)) {
     rstudioapi::documentOpen(filename)
   } else {

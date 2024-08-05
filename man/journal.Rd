@@ -4,10 +4,12 @@
 \alias{journal}
 \title{Launches a journaling session for the current day.}
 \usage{
-journal(base_path = Sys.getenv("LARKDOWN_DIR"))
+journal(base_path = Sys.getenv("LARKDOWN_DIR"), date = Sys.Date())
 }
 \arguments{
 \item{base_path}{directory in which to save the journal}
+
+\item{date}{Which date to open journal for, defaults to today's date}
 }
 \description{
 Launches a journaling session for the current day.
