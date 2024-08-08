@@ -15,6 +15,7 @@ file_text <- function(path){
 #' @param dir path to a directory
 #' @param level used in recursion
 #' @param pattern passed to list.files()
+#' @export
 dir_str <- function(dir, level = 0, pattern = NULL) {
   # Get the list of files and directories in the specified directory
   files <- list.files(dir, full.names = TRUE, pattern = pattern)
@@ -65,6 +66,24 @@ yt_text <- function(yt_url) {
   out <- yt_document[[1]]$page_content
   out
 }
+
+#' Read the text of a jupyter notebook to a formatted string
+#' 
+#' @param path the path to the jupyter notebook
+#' @export
+jupyter_text <- function(path) {
+  path <- path.expand(path)
+  
+  lcc <- reticulate::import("langchain_community")
+  
+  loader <- lcc$document_loaders$NotebookLoader
+  docs <- loader(path)$load()
+  if (length(docs) > 1) stop("Jupyter notebook documents should have length 1")
+  text <- docs[[1]]$page_content
+  
+  text
+}
+
 
 #' Returns a character vector (length 1) of concatenated message text
 #' 
