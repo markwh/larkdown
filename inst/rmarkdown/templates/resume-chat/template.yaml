@@ -1,0 +1,4 @@
+name: resume-chat
+description: >
+   Contains a prompt and user instructions for interactively creating a resume
+create_dir: FALSE
