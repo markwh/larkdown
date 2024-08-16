@@ -37,11 +37,12 @@ dir_str <- function(dir, level = 0, pattern = NULL) {
 
 #' Return text of files for all files in a directory
 #' @param path Path to directory
+#' @param ... passed to `list.files()`
 #' @importFrom purrr possibly
 #' @export
-dir_text <- function(path, pattern = ".*"){
+dir_text <- function(path, ...){
   path <- normalizePath(path)
-  files <- list.files(path, pattern = pattern, full.names = TRUE)
+  files <- list.files(path, full.names = TRUE, ...)
   
   file_names <- gsub(path, "", files)
 

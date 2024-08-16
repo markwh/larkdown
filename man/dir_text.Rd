@@ -4,10 +4,12 @@
 \alias{dir_text}
 \title{Return text of files for all files in a directory}
 \usage{
-dir_text(path, pattern = ".*")
+dir_text(path, ...)
 }
 \arguments{
 \item{path}{Path to directory}
+
+\item{...}{passed to `list.files()`}
 }
 \description{
 Return text of files for all files in a directory
