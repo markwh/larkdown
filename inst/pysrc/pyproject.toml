@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "larkdown"
+version = "0.1.0"
+description = "A Python module for parsing larkdown and streaming messages."
+authors = ["Mark Hagemann <mark.hagemann@gmail.com>"]
+readme = "README.md"
+packages = [{include = "larkdown"}]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+langchain = "*"
+langchain-community = "*"
+
+[tool.poetry.scripts]
+larkdown = 'larkdown.larkdown:main'
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
