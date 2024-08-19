@@ -30,7 +30,7 @@ dir_str <- function(dir, level = 0, pattern = NULL) {
     
     # If the file is a directory, recursively print its structure
     if (dir.exists(file)) {
-      print_folder_structure(file, level + 1)
+      dir_str(file, level + 1)
     }
   }
 }
