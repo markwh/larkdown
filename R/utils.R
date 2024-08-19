@@ -6,10 +6,11 @@
 #' 
 #' @export
 import_larkdown <- function() {
-  reticulate::import_from_path(
+  ld <- reticulate::import_from_path(
     module = "larkdown",
     path = system.file("pysrc", package = "larkdown", mustWork = TRUE), 
     delay_load = TRUE)
+  ld$larkdown
 }
 
 #' Sets the `ld_endpoint_url` option
