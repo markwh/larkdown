@@ -92,13 +92,17 @@ journal <- function(base_path = Sys.getenv("LARKDOWN_DIR"), date = Sys.Date()) {
 #' @param message LangChain `BaseMessage` object
 #' @export
 ld_message_type <- function(message) {
-  out <- case_when(
-    grepl("SystemMessage$", class(message)[1]) ~ "system",
-    grepl("HumanMessage$", class(message)[1]) ~ "human",
-    grepl("AIMessage$", class(message)[1]) ~ "ai",
-    TRUE ~ NA_character_
-  )
-  out
+  class_name <- class(message)[1]
+  
+  if (grepl("SystemMessage$", class_name)) {
+    return("system")
+  } else if (grepl("HumanMessage$", class_name)) {
+    return("human")
+  } else if (grepl("AIMessage$", class_name)) {
+    return("ai")
+  } else {
+    return(NA_character_)
+  }
 }
 
 #' Creates a larkdown-formatted character string from a list of messages
