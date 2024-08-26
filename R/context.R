@@ -68,6 +68,17 @@ yt_text <- function(yt_url) {
   out
 }
 
+#' Returns the description text from a youtube video
+#' 
+#' Works around a currently open issue with pytube package: https://github.com/pytube/pytube/issues/1626#issuecomment-1775501965
+#' 
+#' @param yt_url url of youtube video
+#' @export
+yt_desc <- function(yt_url) {
+  ld <- import_larkdown()
+  ld$get_yt_description(yt_url)
+}
+
 #' Read the text of a jupyter notebook to a formatted string
 #' 
 #' @param path the path to the jupyter notebook

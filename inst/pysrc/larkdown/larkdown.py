@@ -1,6 +1,20 @@
 from langserve import RemoteRunnable
 from langchain.memory import ChatMessageHistory
 from langchain_core.messages import SystemMessage
+from pytube import YouTube 
+
+def get_yt_description(url):
+    """
+    Copied from https://github.com/pytube/pytube/issues/1626#issuecomment-1775501965
+    """
+    yt = YouTube(url)
+    for n in range(6):
+        try:
+            description =  yt.initial_data["engagementPanels"][n]["engagementPanelSectionListRenderer"]["content"]["structuredDescriptionContentRenderer"]["items"][1]["expandableVideoDescriptionBodyRenderer"]["attributedDescriptionBodyText"]["content"]            
+            return description
+        except:
+            continue
+    return False
 
 def parse_larkdown_to_tuples(text, larkdown_prompt):
     """
