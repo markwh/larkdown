@@ -7,8 +7,6 @@
 chatbot_sys_prompt(chatbot_name, root_dir = Sys.getenv("CHATBOT_ROOT"))
 }
 \arguments{
-\item{chatbot_name}{name of the chatbot}
-
 \item{root_dir}{root directory of chatbots}
 }
 \description{
