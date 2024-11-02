@@ -133,3 +133,47 @@ count_tokens <- function(input, encoding = "cl100k_base") {
   
   out
 }
+
+
+
+#' Returns a bytestring of an image, rescaled to specified width
+#' 
+#' @param path passed to `magick::image_read()`
+#' @param width resized image width in pixels. Resize will happen before encoding. 
+#' @export
+convert_image_to_bytestring <- function(path, width = 200, show_image = FALSE) {
+  
+  # Read the image from the clipboard
+  image <- magick::image_read(path)
+  
+  # Resize the image to the specified width and height
+  # You can adjust these dimensions as needed
+  resized_image <- magick::image_resize(image, geometry = width)
+  
+  if (show_image) print(resized_image)#magick::image_display(resized_image)
+  
+  # Convert the image to a raw vector
+  raw_image <- magick::image_write(resized_image, format = "png")
+  
+  # Convert the raw vector to a base64 encoded string
+  byte_string <- base64enc::base64encode(raw_image)
+  
+  return(byte_string)
+}
+
+#' For use with Larkdown, produces a bytestring when knitted such that `larkdown.parse_larkdown()` creates image-augmented messages
+#' 
+#' @inheritParams convert_image_to_bytestring
+#' @export
+image_context <- function(path, width = 200, show_image = interactive()) {
+  
+  bytestring <- convert_image_to_bytestring(path, width, show_image = show_image)
+  
+  out_string <- sprintf("<<image_begin>>%s<<image_end>>",
+                        bytestring)
+  
+  if (interactive()) return(invisible(out_string))
+  
+  out_string
+}
+

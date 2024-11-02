@@ -1,6 +1,6 @@
 from langserve import RemoteRunnable
-from langchain.memory import ChatMessageHistory
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import SystemMessage, AIMessage, HumanMessage
+from langchain_community.chat_message_histories import ChatMessageHistory
 from pytube import YouTube 
 
 def get_yt_description(url):
@@ -67,17 +67,64 @@ def parse_larkdown(text, larkdown_prompt):
     Returns a list of LangChain message objects
     """
     tuples = parse_larkdown_to_tuples(text, larkdown_prompt)
-
-    chat_history = ChatMessageHistory() 
-    for role, content in tuples:
-        if role == "system":
-            chat_history.add_message(SystemMessage(content))
-        if role == "human":
-            chat_history.add_user_message(content)
-        elif role == "ai":
-            chat_history.add_ai_message(content)
+    message_list = [parse_message_tuple(msg) for msg in tuples]
+    
+    chat_history = ChatMessageHistory()
+    chat_history.add_messages(message_list)
     
     return chat_history.messages
+  
+def parse_message_tuple(message_tuple):
+    role = message_tuple[0]
+    content = message_tuple[1]
+    if role == "system":
+        msg = SystemMessage(content)
+    elif role == "human":
+        msg = parse_human_message(content)
+    elif role == "ai":
+        msg = AIMessage(content)
+        
+    return msg
+
+def parse_human_message(text):
+    """
+    text could contain an image endcoded as a bytestring. In which case it should follow the following model:
+
+message = HumanMessage(
+    content=[
+        {"type": "text", "text": "describe the weather in this image"},
+        {
+            "type": "image_url",
+            "image_url": {"url": f"data:image/jpeg;base64,{image_data}"},
+        },
+    ],
+)
+
+This bytestring can always be recognized as being contained within the following delimiters:
+  <<image_begin>>
+  <<image_end>>
+  
+    """
+    if "<<image_begin>>" in text:
+        text = text.split("<<image_begin>>")
+        text0 = text[0]
+        text1 = text[1].split("<<image_end>>")
+        
+        image_data = text1[0]
+        keep_text = text0 + text1[1]
+        message = HumanMessage(
+            content=[
+                {"type": "text", "text": keep_text},
+                {
+                    "type": "image_url",
+                    "image_url": {"url": f"data:image/jpeg;base64,{image_data}"},
+                },
+            ],
+        )
+    else:
+        message = HumanMessage(content=text)
+    
+    return message
 
 def append_file(file, text):
     with open(file, 'a') as f:
