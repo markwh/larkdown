@@ -10,7 +10,3 @@ opts_chunk$set(echo = TRUE, eval = FALSE)
 ld_register_endpoints("http://localhost:8000")
 ```
 
->system
-
-You are an AI assistant interacting with the user via Rmarkdown.
-
