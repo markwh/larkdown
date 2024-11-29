@@ -6,3 +6,6 @@
 .DS_Store
 .quarto
 notebook
+__pycache__
+ld-files
+data-raw/*
